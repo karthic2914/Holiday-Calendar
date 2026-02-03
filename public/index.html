@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visioneering - Team Calendar</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- ✅ Flatpickr Date Picker -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+
+<body>
+<div id="loadingScreen" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(7, 29, 43, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  ">
+    <div style="
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: #00A0DF;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    "></div>
+    <p style="color: white; margin-top: 20px; font-size: 16px;">Loading Holiday Calendar...</p>
+  </div>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  
+  <header class="header">
+    <div class="header-left">
+      <h1 class="department-name">VISIONEERING</h1>
+      <p>Team Calendar</p>
+    </div>
+
+    <div class="header-right">
+      <span id="username" class="user-welcome">Loading...</span>
+      <p>Holiday &amp; Leave Tracker</p>
+    </div>
+  </header>
+
+  <main class="calendar-wrapper">
+
+    <section class="admin-panel collapsed" id="adminPanel" style="display:none;">
+      <div class="admin-header-section">
+        <h2>⚙️ Admin Panel - Manage Administrators</h2>
+        <button class="btn-toggle-admin" type="button" onclick="toggleAdminPanel(event)">Collapse Admin Panel</button>
+      </div>
+
+      <div class="admin-content-section" id="adminContent">
+        <div class="admin-card">
+          <h3>➕ Add New Team Member</h3>
+
+          <div class="admin-form">
+            <div class="form-row">
+              <input type="text" id="newEmployeeId" placeholder="Employee ID (e.g., 408275a)">
+              <input type="text" id="newDisplayName" placeholder="Display Name (e.g., Hajo)">
+              <select id="newUserRole">
+                <option>Select Role...</option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="developer">Developer</option>
+              </select>
+              <button class="btn-add" type="button" onclick="addUser()">Add User</button>
+            </div>
+          </div>
+
+          <div class="info-note">
+            ℹ️ All users are <strong>developers by default</strong>. Use this form to add users and assign Manager or Admin roles.
+            Only administrators shown below can manage user roles.
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3>👥 Current Administrators</h3>
+          <div id="adminUsersList" class="user-list">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <div class="controls-left">
+        <div class="month-nav">
+          <button type="button" onclick="changeMonth(-1)">←</button>
+
+          <div class="month-display" id="currentMonth">February 2026</div>
+
+          <button type="button" onclick="changeMonth(1)">→</button>
+        </div>
+
+        <div class="year-dropdown">
+          <select id="yearSelect" class="year-btn" onchange="changeYear()">
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026" selected>2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="add-entry-btn" type="button" onclick="openModal('entryModal')">+ Add Entry</button>
+    </div>
+
+    <div class="calendar" aria-label="Team calendar">
+      <div class="calendar-header">MON</div>
+      <div class="calendar-header">TUE</div>
+      <div class="calendar-header">WED</div>
+      <div class="calendar-header">THU</div>
+      <div class="calendar-header">FRI</div>
+      <div class="calendar-header">SAT</div>
+      <div class="calendar-header">SUN</div>
+
+      <div id="calendar" class="calendar-days"></div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-color" style="background: var(--holiday);"></span><span>Public Holiday</span></div>
+      <div class="legend-item"><span class="legend-color" style="background: var(--leave);"></span><span>Leave</span></div>
+      <div class="legend-item"><span class="legend-color" style="background: var(--sick);"></span><span>Sick</span></div>
+      <div class="legend-item"><span class="legend-color" style="background: var(--wfh);"></span><span>WFH</span></div>
+      <div class="legend-item"><span class="legend-color" style="background: var(--travel);"></span><span>Work Travel</span></div>
+    </div>
+
+  </main>
+
+  <div class="modal" id="entryModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add Entry</h2>
+        <button class="close-btn" type="button" onclick="closeModal('entryModal')">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Date</label>
+          <!-- ✅ CHANGED: type="text" with readonly, Flatpickr will handle it -->
+          <input type="text" id="entryDate" placeholder="Select date..." required readonly>
+        </div>
+
+        <div class="form-group">
+          <label>Type</label>
+          <select id="entryType" required data-selected="Leave">
+            <option value="Leave">🔵 Leave</option>
+            <option value="Sick">🟠 Sick</option>
+            <option value="WFH">🟢 Work From Home</option>
+            <option value="Work From Stavanger">🏢 Work From Stavanger</option>
+            <option value="Work From Oslo">🏢 Work From Oslo</option>
+            <option value="Work Travel">🟣 Work Travel</option>
+            <option value="Public Holiday">🔴 Public Holiday</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="entryName" readonly>
+        </div>
+
+        <div class="form-group">
+          <label>Note (optional)</label>
+          <input type="text" id="entryNote" placeholder="Additional details">
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" type="button" onclick="closeModal('entryModal')">Cancel</button>
+          <button type="button" class="btn-primary" id="saveEntryBtn" onclick="saveEntry(event)">Save Entry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

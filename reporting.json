@@ -1,0 +1,207 @@
+{
+  "reportingStructure": {
+    "comment": "Visioneering team structure - extracted from Azure AD on 2026-01-31. All leave approvals go to Arun. Ørjan and Erik get CC'd for their team members.",
+    "approver": {
+      "id": "336899",
+      "name": "Arun Joshi",
+      "email": "Arun.Joshi@akersolutions.com",
+      "role": "Visioneering Manager - Approves all leave"
+    },
+    "managers": {
+      "325690": {
+        "name": "Ørjan Brekke",
+        "email": "Orjan.Brekke@akersolutions.com",
+        "role": "Senior Specialist - Gets CC'd for his team",
+        "team": ["508462", "390335"]
+      },
+      "258441": {
+        "name": "Erik Tysdal Egaas",
+        "email": "Erik.Egaas@akersolutions.com",
+        "role": "Senior Specialist - Gets CC'd for his team",
+        "team": ["389331", "505565", "390910", "326657", "400954", "405014"]
+      }
+    },
+    "teamMembers": [
+      {
+        "id": "336899",
+        "name": "Arun Joshi",
+        "email": "Arun.Joshi@akersolutions.com",
+        "role": "Visioneering Manager",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "408275a",
+        "name": "Mahadevan Sivasubramanian Karthic",
+        "email": "Mahadevan.Sivasubramanian.Karthic@akersolutions.com",
+        "role": "DevOps Engineer",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "325690",
+        "name": "Ørjan Brekke",
+        "email": "Orjan.Brekke@akersolutions.com",
+        "role": "Senior Specialist",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "258441",
+        "name": "Erik Tysdal Egaas",
+        "email": "Erik.Egaas@akersolutions.com",
+        "role": "Senior Specialist",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "508462",
+        "name": "Naz Kozak",
+        "email": "Naz.Kozak@akersolutions.com",
+        "role": "Advisor",
+        "reportsTo": "336899",
+        "notifyManager": "325690",
+        "managerEmail": "Orjan.Brekke@akersolutions.com"
+      },
+      {
+        "id": "390335",
+        "name": "Negin Rabiee",
+        "email": "Negin.Rabiee@akersolutions.com",
+        "role": "Senior Designer",
+        "reportsTo": "336899",
+        "notifyManager": "325690",
+        "managerEmail": "Orjan.Brekke@akersolutions.com"
+      },
+      {
+        "id": "389331",
+        "name": "Aron Hansen Nøstvold",
+        "email": "Aron.Nostvold.Hansen@akersolutions.com",
+        "role": "Designer",
+        "reportsTo": "336899",
+        "notifyManager": "258441",
+        "managerEmail": "Erik.Egaas@akersolutions.com"
+      },
+      {
+        "id": "505565",
+        "name": "John McKay",
+        "email": "John.McKay@akersolutions.com",
+        "role": "Senior Advisor",
+        "reportsTo": "336899",
+        "notifyManager": "258441",
+        "managerEmail": "Erik.Egaas@akersolutions.com"
+      },
+      {
+        "id": "390910",
+        "name": "Andre Gya",
+        "email": "Andre.Gya@akersolutions.com",
+        "role": "Senior Designer",
+        "reportsTo": "336899",
+        "notifyManager": "258441",
+        "managerEmail": "Erik.Egaas@akersolutions.com"
+      },
+      {
+        "id": "326657",
+        "name": "Odd Vidar Hobberstad",
+        "email": "Odd.Vidar.Hobberstad@akersolutions.com",
+        "role": "Senior Advisor",
+        "reportsTo": "336899",
+        "notifyManager": "258441",
+        "managerEmail": "Erik.Egaas@akersolutions.com"
+      },
+      {
+        "id": "400954",
+        "name": "Sondre Johre",
+        "email": "Sondre.Johre@akersolutions.com",
+        "role": "Senior Designer",
+        "reportsTo": "336899",
+        "notifyManager": "258441",
+        "managerEmail": "Erik.Egaas@akersolutions.com"
+      },
+      {
+        "id": "405014",
+        "name": "Kenneth Ersdal",
+        "email": "Kenneth.Ersdal@akersolutions.com",
+        "role": "Designer",
+        "reportsTo": "336899",
+        "notifyManager": "258441",
+        "managerEmail": "Erik.Egaas@akersolutions.com"
+      },
+      {
+        "id": "505600",
+        "name": "Hajo Hoetjes",
+        "email": "Hajo.Hoetjes@akersolutions.com",
+        "role": "Specialist Animation",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "502713",
+        "name": "Jiafeng Xu",
+        "email": "Jiafeng.Xu@akersolutions.com",
+        "role": "Specialist Simulation",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "394126",
+        "name": "Richard Barlow",
+        "email": "Richard.Barlow@akersolutions.com",
+        "role": "Senior Developer",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "1s7328",
+        "name": "Thomas Byberg",
+        "email": "thomas.byberg@akersolutions.com",
+        "role": "Senior Specialist",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "150180",
+        "name": "Timo Berg",
+        "email": "timo.berg@akersolutions.com",
+        "role": "Senior Specialist",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "110578",
+        "name": "Georg Gaard",
+        "email": "georg.gaard@akersolutions.com",
+        "role": "Senior Manager",
+        "reportsTo": "336899",
+        "notifyManager": false
+      },
+      {
+        "id": "373708",
+        "name": "Nenad Poljcic",
+        "email": "Nenad.Poljcic@akersolutions.com",
+        "role": "Power Platform Developer",
+        "reportsTo": "336899",
+        "notifyManager": false
+      }
+    ]
+  },
+  "teamSummary": {
+    "total": 19,
+    "source": "Azure AD - JP200 Visioneering (200)",
+    "extractedDate": "2026-01-31",
+    "structure": {
+      "approver": "Arun Joshi - Approves all leave",
+      "orjanTeam": ["Naz", "Negin"],
+      "erikTeam": ["Aron", "John", "Andre", "Odd Vidar", "Sondre", "Kenneth"],
+      "directToArun": ["Mahadevan", "Ørjan", "Erik", "Hajo", "Jiafeng", "Richard", "Thomas", "Timo", "Georg", "Nenad"]
+    }
+  },
+  "notificationRules": {
+    "explanation": {
+      "approval": "Only Arun Joshi can approve/reject (gets approve/reject buttons)",
+      "notification": "Arun + relevant manager (Ørjan or Erik if applicable) + employee",
+      "orjanTeam": "Naz, Negin - Ørjan gets CC'd",
+      "erikTeam": "Aron, John, Andre, Odd Vidar, Sondre, Kenneth - Erik gets CC'd",
+      "directToArun": "Mahadevan, Ørjan, Erik, Hajo, Jiafeng, Richard, Thomas, Timo, Georg, Nenad - No manager CC"
+    }
+  }
+}
