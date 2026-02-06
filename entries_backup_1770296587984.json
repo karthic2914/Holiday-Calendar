@@ -1,0 +1,17 @@
+[
+  {
+    "id": "09ee0f7db2967ac81a75762a",
+    "groupId": "6b351ba81b3d5d5909ce4b14",
+    "token": "fc2f60a8ed122c38fdfa480d480b90ed69fd",
+    "date": "2026-02-06",
+    "type": "Leave",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "displayName": "408275a",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "status": "approved",
+    "createdAt": "2026-02-05T10:52:06.512Z",
+    "approvedAt": "2026-02-05T10:52:41.512Z"
+  }
+]

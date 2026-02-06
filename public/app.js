@@ -7,16 +7,22 @@ const monthNames = [
 ];
 
 const typeColors = {
-  "Public Holiday": "#EF4444",
-  "Leave": "#3B82F6",
-  "Sick": "#F97316",
-  "WFH": "#14B8A6",
-  "Work From Stavanger": "#9b59b6",
-  "Work From Oslo": "#16a085",
-  "Work Travel": "#8B5CF6"
+  "Public Holiday": "#EF4444",     // Red
+  "Leave": "#3B82F6",               // Blue
+  "Sick": "#F97316",                // Orange
+  "WFH": "#14B8A6",                 // Teal
+  "Work From Stavanger": "#9b59b6", // Purple ✅
+  "Work From Oslo": "#16a085",      // Dark Teal ✅
+  "Work Travel": "#8B5CF6"          // Violet
 };
 
-// Norwegian public holidays (example set)
+// ✅ STATUS COLORS for calendar entries
+const statusColors = {
+  "pending": "#3B82F6",   // Blue
+  "approved": "#10B981",  // Green
+  "rejected": "#EF4444"   // Red
+};
+
 const publicHolidays = {
   "2026-01-01": "New Year's Day",
   "2026-04-02": "Maundy Thursday",
@@ -44,6 +50,28 @@ let currentUser = null;
 
 let isSaving = false;
 
+// Selection toast state
+let selectionToastId = null;
+let selectionToastTimer = null;
+let lastSelectionKey = "";
+
+// ✅ NEW: suppress selection toast when we clear/close modal
+let suppressSelectionToasts = false;
+
+// ===============================
+// Date helpers (LOCAL SAFE)
+// ===============================
+function toYMDLocal(dateObj) {
+  const y = dateObj.getFullYear();
+  const m = String(dateObj.getMonth() + 1).padStart(2, "0");
+  const d = String(dateObj.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+function ymdToLocalDate(dateStr) {
+  // noon avoids DST edges
+  return new Date(`${dateStr}T12:00:00`);
+}
+
 // ===============================
 // Init
 // ===============================
@@ -61,12 +89,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   console.log("✅ Initialization complete");
   console.log("📊 Total entries loaded:", entries.length);
-  
-  // ✅ HIDE LOADING SCREEN
-  const loadingScreen = document.getElementById('loadingScreen');
-  if (loadingScreen) {
-    loadingScreen.style.display = 'none';
-  }
+
+  const loadingScreen = document.getElementById("loadingScreen");
+  if (loadingScreen) loadingScreen.style.display = "none";
 });
 
 // ===============================
@@ -109,18 +134,20 @@ async function loadUser() {
     console.log("✓ User:", user.employeeId, `(${user.email})`, `[${user.role}]`);
 
     const usernameEl = document.getElementById("username");
-    if (usernameEl) usernameEl.textContent = `Welcome, ${user.email}`;
+	if (usernameEl) {
+	  // Show display name if available, otherwise show email without @ symbol
+	  const displayText = user.displayName || user.email.split('@')[0];
+	  usernameEl.textContent = `Welcome, ${displayText}`;
+	}
 
-    if (user.role === 'admin') {
-      const adminPanel = document.getElementById('adminPanel');
+    if (user.role === "admin") {
+      const adminPanel = document.getElementById("adminPanel");
       if (adminPanel) {
-        adminPanel.style.display = 'block';
-        adminPanel.classList.add('collapsed');
-        
-        const adminContent = document.getElementById('adminContent');
-        if (adminContent) {
-          adminContent.style.display = 'none';
-        }
+        adminPanel.style.display = "block";
+        adminPanel.classList.add("collapsed");
+
+        const adminContent = document.getElementById("adminContent");
+        if (adminContent) adminContent.style.display = "none";
       }
       await loadAdminUsers();
     }
@@ -171,25 +198,25 @@ async function loadAdminUsers() {
 }
 
 function renderAdminUsers(users) {
-  const container = document.getElementById('adminUsersList');
+  const container = document.getElementById("adminUsersList");
   if (!container) return;
 
-  container.innerHTML = '';
+  container.innerHTML = "";
 
   if (!users || users.length === 0) {
     container.innerHTML = '<div class="loading">No admins/managers found.</div>';
     return;
   }
 
-  users.forEach(user => {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'user-item';
+  users.forEach((user) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "user-item";
 
     const employeeId = user.employeeId;
     const email = user.email || `${employeeId}@akersolutions.com`;
     let displayName = user.displayName || employeeId;
 
-    if (String(displayName).includes('@')) displayName = employeeId;
+    if (String(displayName).includes("@")) displayName = employeeId;
 
     wrapper.innerHTML = `
       <div class="user-id-email">
@@ -302,20 +329,20 @@ function deleteUserRole(employeeId, displayName) {
 }
 
 function toggleAdminPanel(event) {
-  const panel = document.getElementById('adminPanel');
+  const panel = document.getElementById("adminPanel");
   const btn = event.target;
-  const content = document.getElementById('adminContent');
+  const content = document.getElementById("adminContent");
 
   if (!panel || !btn || !content) return;
 
-  if (panel.classList.contains('collapsed')) {
-    panel.classList.remove('collapsed');
-    content.style.display = 'grid';
-    btn.textContent = 'Collapse Admin Panel';
+  if (panel.classList.contains("collapsed")) {
+    panel.classList.remove("collapsed");
+    content.style.display = "grid";
+    btn.textContent = "Collapse Admin Panel";
   } else {
-    panel.classList.add('collapsed');
-    content.style.display = 'none';
-    btn.textContent = 'Expand Admin Panel';
+    panel.classList.add("collapsed");
+    content.style.display = "none";
+    btn.textContent = "Expand Admin Panel";
   }
 }
 
@@ -323,115 +350,148 @@ function toggleAdminPanel(event) {
 // Calendar Rendering
 // ===============================
 function renderCalendar() {
-  const calendar = document.getElementById('calendar');
+  const calendar = document.getElementById("calendar");
   if (!calendar) return;
-  
-  calendar.innerHTML = '';
-  
+
+  calendar.innerHTML = "";
+
   const year = currentYear;
   const month = currentMonth;
-  
+
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
   const daysInMonth = lastDay.getDate();
-  
+
   let startDay = firstDay.getDay() - 1;
   if (startDay === -1) startDay = 6;
-  
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
+
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  
+
   for (let i = 0; i < startDay; i++) {
-    const emptyDay = document.createElement('div');
-    emptyDay.className = 'calendar-day empty-day';
+    const emptyDay = document.createElement("div");
+    emptyDay.className = "calendar-day empty-day";
     calendar.appendChild(emptyDay);
   }
-  
+
   for (let day = 1; day <= daysInMonth; day++) {
-    const dayElement = document.createElement('div');
-    
+    const dayElement = document.createElement("div");
+
     const currentDate = new Date(year, month, day);
     currentDate.setHours(0, 0, 0, 0);
-    
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    
+
+    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
     const isPastOrToday = currentDate < tomorrow;
     const isToday = currentDate.getTime() === today.getTime();
     const isWeekend = currentDate.getDay() === 0 || currentDate.getDay() === 6;
-    
-    dayElement.className = 'calendar-day';
-    if (isPastOrToday) dayElement.classList.add('past');
-    if (isToday) dayElement.classList.add('today');
-    if (isWeekend) dayElement.classList.add('weekend');
-    
-    const dayNumber = document.createElement('div');
-    dayNumber.className = 'day-number';
+
+    dayElement.className = "calendar-day";
+    if (isPastOrToday) dayElement.classList.add("past");
+    if (isToday) dayElement.classList.add("today");
+    if (isWeekend) dayElement.classList.add("weekend");
+
+    const dayNumber = document.createElement("div");
+    dayNumber.className = "day-number";
     dayNumber.textContent = day;
     dayElement.appendChild(dayNumber);
-    
-    const entriesWrap = document.createElement('div');
-    entriesWrap.className = 'day-entries';
+
+    const entriesWrap = document.createElement("div");
+    entriesWrap.className = "day-entries";
     dayElement.appendChild(entriesWrap);
-    
+
     if (publicHolidays[dateStr]) {
-      const holidayBadge = document.createElement('div');
-      holidayBadge.className = 'entry-badge public-holiday';
+      const holidayBadge = document.createElement("div");
+      holidayBadge.className = "entry-badge public-holiday";
       holidayBadge.textContent = publicHolidays[dateStr];
       entriesWrap.appendChild(holidayBadge);
     }
-    
-    const dayEntries = entries.filter(e => e.date === dateStr);
 
-    const userHasEntry = dayEntries.some(e => 
-      e.employeeId === currentUser?.employeeId &&
-      e.status !== 'rejected'
+    const dayEntries = entries.filter((e) => e.date === dateStr);
+
+    const userHasEntry = dayEntries.some(
+      (e) => e.employeeId === currentUser?.employeeId && e.status !== "rejected"
     );
 
-    dayEntries.forEach(entry => {
-      const badge = document.createElement('div');
-      const typeClass = entry.type.toLowerCase().replace(/\s+/g, '-');
-      badge.className = `entry-badge ${typeClass}`;
-      badge.textContent = `${entry.email || entry.employeeId} - ${entry.type}`;
+    dayEntries.forEach((entry) => {
+      const badge = document.createElement("div");
+      const typeClass = entry.type.toLowerCase().replace(/\s+/g, "-");
+      const status = (entry.status || "pending").toLowerCase();
+      
+      // ✅ ADD BOTH STATUS AND TYPE CLASSES for color-coding
+      badge.className = `entry-badge status-${status} ${typeClass}`;
+      
+      // ✅ FIXED: Use displayName instead of email
+      badge.textContent = `${entry.displayName || entry.email || entry.employeeId} - ${entry.type}`;
+      
+      // ✅ ADD STATUS ICON
+      if (status === "approved") {
+        badge.textContent = `✅ ${badge.textContent}`;
+      } else if (status === "rejected") {
+        badge.textContent = `❌ ${badge.textContent}`;
+        badge.style.textDecoration = "line-through";
+        badge.style.opacity = "0.7";
+      } else {
+        badge.textContent = `⏱️ ${badge.textContent}`;
+      }
+      
       entriesWrap.appendChild(badge);
     });
 
-    // ✅ If user has entry, disable the day completely
+    // ✅ ADD STATUS CLASS TO DAY ELEMENT
     if (userHasEntry) {
-      dayElement.classList.add('past');
-      dayElement.classList.add('disabled');
-      dayElement.style.cursor = 'not-allowed';
-      dayElement.style.opacity = '0.6';
+      const userEntry = dayEntries.find(
+        (e) => e.employeeId === currentUser?.employeeId && e.status !== "rejected"
+      );
+      if (userEntry) {
+        const status = (userEntry.status || "pending").toLowerCase();
+        const typeClass = userEntry.type.toLowerCase().replace(/\s+/g, "-");
+        dayElement.classList.add("has-user-entry", `status-${status}`, typeClass);
+      }
+      
+      dayElement.classList.add("past", "disabled");
+      dayElement.style.cursor = "not-allowed";
+      dayElement.style.opacity = "0.6";
       dayElement.onclick = null;
     } else {
       const canClick = !isPastOrToday && !isWeekend;
-
       if (canClick) {
-        dayElement.style.cursor = 'pointer';
+        dayElement.style.cursor = "pointer";
         dayElement.onclick = () => selectDate(dateStr);
       } else {
-        dayElement.style.cursor = 'not-allowed';
+        dayElement.style.cursor = "not-allowed";
         dayElement.onclick = null;
       }
     }
-    
+
     calendar.appendChild(dayElement);
   }
 }
 
 // ===============================
-// Date selection
+// Date selection (calendar click)
 // ===============================
 function selectDate(dateStr) {
-  const selectedDate = new Date(dateStr);
+  console.log('═══════════════════════════════════════');
+  console.log('🖱️ CALENDAR DATE CLICKED');
+  console.log('═══════════════════════════════════════');
+  console.log('📅 Date clicked:', dateStr);
+  
+  const selectedDate = ymdToLocalDate(dateStr);
   selectedDate.setHours(0, 0, 0, 0);
 
   const day = selectedDate.getDay();
   const isWeekend = day === 0 || day === 6;
+  
+  console.log('📊 Date info:');
+  console.log('  - Day of week:', day, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day]);
+  console.log('  - Is weekend?', isWeekend);
 
   if (isWeekend) {
+    console.log('❌ BLOCKED: Weekend date');
     showWarning("Weekend selection is not allowed. Please choose a weekday.", "Invalid Date");
     return;
   }
@@ -441,225 +501,393 @@ function selectDate(dateStr) {
 
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
+  
+  console.log('📅 Date validation:');
+  console.log('  - Today:', toYMDLocal(today));
+  console.log('  - Tomorrow:', toYMDLocal(tomorrow));
+  console.log('  - Selected:', toYMDLocal(selectedDate));
+  console.log('  - Is past/today?', selectedDate < tomorrow);
 
   if (selectedDate < tomorrow) {
+    console.log('❌ BLOCKED: Past or same-day date');
     showWarning("Cannot apply for same-day or past dates. Please select a future date.", "Invalid Date");
     return;
   }
 
-  const existingEntry = entries.find(e => 
-    e.date === dateStr && 
-    e.employeeId === currentUser?.employeeId &&
-    e.status !== 'rejected'
+  const existingEntry = entries.find(
+    (e) => e.date === dateStr && e.employeeId === currentUser?.employeeId && e.status !== "rejected"
   );
+  
+  console.log('🔍 Checking existing entries...');
+  console.log('  - Found existing entry?', !!existingEntry);
 
   if (existingEntry) {
+    console.log('❌ BLOCKED: Entry already exists');
+    console.log('  - Type:', existingEntry.type);
+    console.log('  - Status:', existingEntry.status);
     showWarning(`You already have a ${existingEntry.type} request for this date.`, "Entry Already Exists");
     return;
   }
 
-  document.getElementById("entryDate").value = dateStr;
+  console.log('✅ VALIDATION PASSED - Opening modal with date');
+
+  // ✅ SET DATE IN FLATPICKR - Use Date object, not string!
+  const dateInput = document.getElementById("entryDate");
+  if (dateInput) {
+    console.log('📝 Setting date in Flatpickr...');
+    dateInput.placeholder = "";
+    
+    if (dateInput._flatpickr) {
+      console.log('  → Flatpickr exists, setting date...');
+      // ✅ CRITICAL: Use Date object at noon to avoid timezone issues
+      const dateObj = new Date(dateStr + 'T12:00:00');
+      dateInput._flatpickr.setDate(dateObj, false);
+      dateInput.value = dateStr;
+      console.log('  ✓ Date set:', dateStr);
+      console.log('  - Flatpickr selected:', dateInput._flatpickr.selectedDates);
+      console.log('  - Input value:', dateInput.value);
+    } else {
+      console.log('  → Flatpickr not initialized, setting value directly');
+      dateInput.value = dateStr;
+    }
+  }
+
   document.getElementById("entryName").value = currentUser?.email || "";
   document.getElementById("entryNote").value = "";
 
   addColorIndicatorsToDropdown();
-
+  
+  console.log('🚀 Opening modal...');
   openModal("entryModal");
+  console.log('═══════════════════════════════════════');
 }
 
 // ===============================
-// ✅ FLATPICKR DATE PICKER - DISABLES SPECIFIC DATES!
+// Selection toast while picking
+// ===============================
+function showSelectionToast(dateStrings) {
+  if (suppressSelectionToasts) return;
+
+  if (!Array.isArray(dateStrings)) dateStrings = [];
+  const count = dateStrings.length;
+
+  const key = dateStrings.join("|");
+  if (key === lastSelectionKey) return;
+  lastSelectionKey = key;
+
+  if (selectionToastTimer) clearTimeout(selectionToastTimer);
+  selectionToastTimer = setTimeout(() => {
+    if (suppressSelectionToasts) return;
+
+    if (selectionToastId) closeToast(selectionToastId);
+
+    if (count === 0) {
+      // ✅ don't spam this; only show if user really cleared manually
+      selectionToastId = showInfo("No dates selected", "Selection");
+      return;
+    }
+
+    if (count === 1) {
+      selectionToastId = showInfo(`Selected: ${dateStrings[0]}`, "Selection");
+      return;
+    }
+
+    const start = dateStrings[0];
+    const end = dateStrings[dateStrings.length - 1];
+    const msg = `✅ ${count} weekdays selected: ${start} to ${end}`;
+
+    selectionToastId = showToast(msg, { type: "success", title: "Dates Selected", duration: 2500 });
+  }, 120);
+}
+
+// ===============================
+// Flatpickr setup (multi select + drag)
 // ===============================
 function setupDatePicker() {
   const dateInput = document.getElementById("entryDate");
   if (!dateInput) return;
 
   const tomorrow = new Date();
+  tomorrow.setHours(0, 0, 0, 0);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  
+
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 2);
 
-  // ✅ Get all dates where user has entries
   function getDisabledDates() {
     if (!currentUser) return [];
-    
     const disabledDates = [];
-    
-    // Add user's existing entry dates
-    entries.forEach(entry => {
-      if (entry.employeeId === currentUser.employeeId && entry.status !== 'rejected') {
+    entries.forEach((entry) => {
+      if (entry.employeeId === currentUser.employeeId && entry.status !== "rejected") {
         disabledDates.push(entry.date);
       }
     });
-    
     return disabledDates;
   }
 
-  // ✅ Initialize Flatpickr
-  flatpickr(dateInput, {
+  const fp = flatpickr(dateInput, {
+    mode: "multiple",
     minDate: tomorrow,
     maxDate: maxDate,
     dateFormat: "Y-m-d",
-    
-    // ✅ Disable specific dates (user's existing entries + weekends)
+    conjunction: " to ",
+    static: true,
+    allowInput: false,
+    clickOpens: true,
+
     disable: [
-      function(date) {
-        // Disable weekends
+      function (date) {
         const day = date.getDay();
         if (day === 0 || day === 6) return true;
-        
-        // Disable dates where user has entries
-        const dateStr = date.toISOString().split('T')[0];
-        const disabledDates = getDisabledDates();
-        return disabledDates.includes(dateStr);
+
+        const dateStr = toYMDLocal(date);
+        return getDisabledDates().includes(dateStr);
       }
     ],
-    
-    // ✅ Add visual indicator for dates with entries
-    onDayCreate: function(dObj, dStr, fp, dayElem) {
+
+    onReady: function (selectedDates, dateStr, instance) {
+      const calendar = instance.calendarContainer;
+      let isDragging = false;
+      let dragStartDate = null;
+
+      calendar.addEventListener("mousedown", function (e) {
+        const dayElem = e.target.closest(".flatpickr-day");
+        if (dayElem && !dayElem.classList.contains("flatpickr-disabled")) {
+          isDragging = true;
+          dragStartDate = dayElem.dateObj;
+          e.preventDefault();
+        }
+      });
+
+      calendar.addEventListener("mouseover", function (e) {
+        if (!isDragging) return;
+
+        const dayElem = e.target.closest(".flatpickr-day");
+        if (dayElem && !dayElem.classList.contains("flatpickr-disabled")) {
+          const currentDate = dayElem.dateObj;
+
+          const startStr = toYMDLocal(dragStartDate);
+          const endStr = toYMDLocal(currentDate);
+
+          const startLocal = ymdToLocalDate(startStr);
+          const endLocal = ymdToLocalDate(endStr);
+
+          const earlierStr = startLocal <= endLocal ? startStr : endStr;
+          const laterStr = startLocal <= endLocal ? endStr : startStr;
+
+          const selected = [];
+          const cur = ymdToLocalDate(earlierStr);
+          const end = ymdToLocalDate(laterStr);
+
+          while (cur <= end) {
+            const dow = cur.getDay();
+            if (dow !== 0 && dow !== 6) {
+              const ymd = toYMDLocal(cur);
+              if (!getDisabledDates().includes(ymd)) {
+                selected.push(new Date(cur.getFullYear(), cur.getMonth(), cur.getDate(), 12, 0, 0));
+              }
+            }
+            cur.setDate(cur.getDate() + 1);
+          }
+
+          instance.setDate(selected, false);
+        }
+      });
+
+      document.addEventListener("mouseup", function () {
+        if (isDragging) {
+          isDragging = false;
+          dragStartDate = null;
+
+          // force onChange after drag
+          if (instance.config.onChange && instance.config.onChange.length > 0) {
+            instance.config.onChange.forEach((fn) => {
+              fn(instance.selectedDates, instance.input.value, instance);
+            });
+          }
+        }
+      });
+
+      calendar.style.userSelect = "none";
+    },
+
+    onDayCreate: function (dObj, dStr, fp, dayElem) {
       const date = dayElem.dateObj;
-      const dateStr = date.toISOString().split('T')[0];
-      
-      // Check if user has entry on this date
-      const hasEntry = entries.some(e => 
-        e.date === dateStr && 
-        e.employeeId === currentUser?.employeeId &&
-        e.status !== 'rejected'
+      const dateStr = toYMDLocal(date);
+
+      const userEntry = entries.find(
+        (e) => e.date === dateStr && e.employeeId === currentUser?.employeeId && e.status !== "rejected"
       );
-      
-      if (hasEntry) {
-        dayElem.classList.add('has-user-entry');
-        dayElem.title = 'You already have an entry for this date';
+
+      if (userEntry) {
+        dayElem.classList.add("has-user-entry");
+        const status = userEntry.status || "pending";
+        dayElem.classList.add(status);
+        dayElem.title = `You already have a ${userEntry.type} (${status}) for this date`;
       }
     },
-    
-    // Styling
-    theme: "light",
-    allowInput: false,
-    clickOpens: true
+
+    onChange: function (selectedDates, dateStr, instance) {
+      if (suppressSelectionToasts) return;
+
+      if (selectedDates.length > 0) {
+        const sortedDates = [...selectedDates].sort((a, b) => a - b);
+        const dateStrings = sortedDates.map((d) => toYMDLocal(d));
+
+        console.log(`📅 Selected ${dateStrings.length} weekday(s):`, dateStrings);
+
+        showSelectionToast(dateStrings);
+
+        if (dateStrings.length === 1) {
+          dateInput.value = dateStrings[0];
+        } else {
+          const startDate = dateStrings[0];
+          const endDate = dateStrings[dateStrings.length - 1];
+          dateInput.value = `${startDate} to ${endDate} (${dateStrings.length} weekdays)`;
+        }
+
+        const helpText = document.querySelector(".date-selection-help");
+        if (helpText) {
+          if (dateStrings.length === 1) {
+            helpText.innerHTML = '💡 <strong>Drag</strong> to more dates or click to add individual days';
+            helpText.style.color = "var(--text-muted)";
+            helpText.style.fontWeight = "normal";
+          } else {
+            helpText.innerHTML = `✅ <strong>${dateStrings.length} weekdays selected:</strong> ${dateStrings.join(", ")}`;
+            helpText.style.color = "#059669";
+            helpText.style.fontWeight = "600";
+          }
+        }
+      } else {
+        // only show if user manually cleared (not when closing)
+        showSelectionToast([]);
+
+        const helpText = document.querySelector(".date-selection-help");
+        if (helpText) {
+          helpText.innerHTML = '💡 <strong>Click & drag</strong> to select multiple dates, or click individual dates (weekends auto-skipped)';
+          helpText.style.color = "var(--text-muted)";
+          helpText.style.fontWeight = "normal";
+        }
+      }
+    },
+
+    onValueUpdate: function (selectedDates) {
+      if (suppressSelectionToasts) return;
+
+      if (selectedDates.length > 1) {
+        const sortedDates = [...selectedDates].sort((a, b) => a - b);
+        const dateStrings = sortedDates.map((d) => toYMDLocal(d));
+        dateInput.value = `${dateStrings[0]} to ${dateStrings[dateStrings.length - 1]} (${dateStrings.length} weekdays)`;
+      }
+    }
   });
+
+  dateInput._flatpickr = fp;
 }
 
 // ===============================
-// Save Entry with validation
+// Save Entry (✅ BATCH ENDPOINT)
 // ===============================
 async function saveEntry() {
-  if (isSaving) {
-    console.log('⚠️ Already saving, ignoring duplicate click');
-    return;
-  }
-  
+  if (isSaving) return;
   isSaving = true;
 
-  const saveBtn = document.getElementById('saveEntryBtn');
-  const cancelBtn = document.querySelector('.btn-secondary');
-  
+  const saveBtn = document.getElementById("saveEntryBtn");
+  const cancelBtn = document.querySelector(".btn-secondary");
+
   if (saveBtn) {
     saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving...';
-    saveBtn.style.opacity = '0.6';
-    saveBtn.style.cursor = 'not-allowed';
+    saveBtn.textContent = "Saving...";
+    saveBtn.style.opacity = "0.6";
+    saveBtn.style.cursor = "not-allowed";
   }
-  
   if (cancelBtn) {
     cancelBtn.disabled = true;
-    cancelBtn.style.opacity = '0.6';
-    cancelBtn.style.cursor = 'not-allowed';
+    cancelBtn.style.opacity = "0.6";
+    cancelBtn.style.cursor = "not-allowed";
   }
 
   try {
-    const date = document.getElementById('entryDate').value;
-    const type = document.getElementById('entryType').value;
-    const name = document.getElementById('entryName').value;
-    const note = document.getElementById('entryNote').value;
+    const dateInput = document.getElementById("entryDate");
+    const type = document.getElementById("entryType").value;
+    const name = document.getElementById("entryName").value;
+    const note = document.getElementById("entryNote").value;
 
-    if (!date || !type) {
-      showWarning('Please select date and type', 'Missing Info');
+    const fp = dateInput?._flatpickr;
+    const selectedDates = fp?.selectedDates || [];
+
+    if (!type) {
+      showWarning("Please select type", "Missing Info");
       return;
     }
 
-    const selectedDate = new Date(date);
-    selectedDate.setHours(0, 0, 0, 0);
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    
-    if (selectedDate < tomorrow) {
-      showError('Cannot apply for same-day or past dates', 'Invalid Date');
+    if (selectedDates.length === 0) {
+      showWarning("Please select at least one date", "No Date Selected");
       return;
     }
 
-    // ✅ Final duplicate check
-    const existingEntry = entries.find(e => 
-      e.date === date && 
-      e.employeeId === currentUser?.employeeId &&
-      e.status !== 'rejected'
-    );
+    const datesToCreate = [...selectedDates]
+      .map((d) => toYMDLocal(d))
+      .sort();
 
-    if (existingEntry) {
-      showWarning(
-        `You already have a ${existingEntry.type} request for ${date}. Please select a different date.`,
-        'Entry Already Exists'
-      );
-      return;
-    }
+    console.log(`💾 Creating ${datesToCreate.length} entries:`, datesToCreate);
 
-    console.log('💾 Saving entry:', { date, type, name, note });
-
-    const resp = await fetch('/api/entry', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ date, type, name, note })
+    // ✅ USE BATCH ENDPOINT - ONE EMAIL PER REQUEST!
+    const resp = await fetch("/api/entry/batch", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ dates: datesToCreate, type, name, note })
     });
 
     if (resp.status === 409) {
-      const msg = await resp.text();
-      showWarning(msg || 'Entry already exists for this date.', 'Duplicate Entry');
+      const data = await resp.json();
+      const msg = data.message || "Some entries already exist.";
+      showWarning(msg, "Duplicate Entry");
+      
+      // ✅ Still refresh calendar to show what was created
+      if (data.createdCount && data.createdCount > 0) {
+        await loadEntries();
+        renderCalendar();
+      }
       return;
     }
 
     if (!resp.ok) {
       const msg = await resp.text();
-      showError(msg || 'Failed to save entry', 'Error');
+      showError(msg || "Failed to save entries", "Error");
       return;
     }
 
     const result = await resp.json();
-    console.log('✅ Entry saved successfully:', result);
 
-    closeModal('entryModal');
+    // ✅ close modal without triggering "No dates selected" toast
+    closeModal("entryModal");
 
-    const formattedDate = new Date(date).toLocaleDateString('en-GB', { 
-      day: 'numeric', 
-      month: 'short', 
-      year: 'numeric' 
-    });
-    showSuccess(`${type} on ${formattedDate} added!`, 'Entry Added');
+    const message =
+      datesToCreate.length === 1
+        ? `${type} entry added for ${datesToCreate[0]}`
+        : `${datesToCreate.length} ${type} entries added (${datesToCreate[0]} to ${datesToCreate[datesToCreate.length - 1]})`;
+
+    showSuccess(message + "\n\n✉️ Manager notified via ONE email", "Entries Added");
 
     await loadEntries();
     renderCalendar();
-
   } catch (e) {
-    console.error('❌ Save error:', e);
-    showError('Failed to save entry. Please try again.', 'Error');
+    console.error("❌ Save error:", e);
+    showError("Failed to save entries. Please try again.", "Error");
   } finally {
     isSaving = false;
-    
+
     if (saveBtn) {
       saveBtn.disabled = false;
-      saveBtn.textContent = 'Save Entry';
-      saveBtn.style.opacity = '1';
-      saveBtn.style.cursor = 'pointer';
+      saveBtn.textContent = "Save Entry";
+      saveBtn.style.opacity = "1";
+      saveBtn.style.cursor = "pointer";
     }
-    
     if (cancelBtn) {
       cancelBtn.disabled = false;
-      cancelBtn.style.opacity = '1';
-      cancelBtn.style.cursor = 'pointer';
+      cancelBtn.style.opacity = "1";
+      cancelBtn.style.cursor = "pointer";
     }
   }
 }
@@ -704,17 +932,56 @@ function updateMonthDisplay() {
 function openModal(modalId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
+
+  if (modalId === "entryModal") {
+    const dateInput = document.getElementById("entryDate");
+    if (dateInput && !dateInput._flatpickr) {
+      console.log('⚠️ Flatpickr not initialized in modal, initializing now...');
+      setupDatePicker();
+    }
+    
+    // ✅ After modal opens, check if there's a value to apply
+    setTimeout(() => {
+      if (dateInput && dateInput.value && dateInput._flatpickr) {
+        console.log('✓ Applying preselected date:', dateInput.value);
+        const dateObj = new Date(dateInput.value + 'T12:00:00');
+        dateInput._flatpickr.setDate(dateObj, false);
+        dateInput.placeholder = '';
+      }
+    }, 100);
+  }
+
   modal.classList.add("active");
 }
 
 function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
+
+  if (modalId === "entryModal") {
+    const dateInput = document.getElementById("entryDate");
+    if (dateInput && dateInput._flatpickr) {
+      // ✅ suppress "No dates selected" toast caused by flatpickr.clear()
+      suppressSelectionToasts = true;
+      lastSelectionKey = "";
+      if (selectionToastId) closeToast(selectionToastId);
+
+      dateInput._flatpickr.clear();
+      dateInput.value = "";
+      dateInput.placeholder = "Select date or date range...";
+
+      setTimeout(() => {
+        suppressSelectionToasts = false;
+      }, 200);
+    }
+  }
+
   modal.classList.remove("active");
 }
 
 document.addEventListener("click", (e) => {
   if (e.target && e.target.classList && e.target.classList.contains("modal")) {
+    if (e.target.id === "entryModal") return; // ✅ don't close on outside click
     e.target.classList.remove("active");
   }
 });
@@ -735,22 +1002,12 @@ function ensureToastContainer() {
 }
 
 function showToast(message, options = {}) {
-  const {
-    type = "info",
-    title = "",
-    duration = 3000,
-    closable = true
-  } = options;
+  const { type = "info", title = "", duration = 3000, closable = true } = options;
 
   const container = ensureToastContainer();
   const toastId = `toast-${++toastIdCounter}`;
 
-  const icons = {
-    success: "✓",
-    error: "✕",
-    warning: "⚠",
-    info: "ℹ"
-  };
+  const icons = { success: "✓", error: "✕", warning: "⚠", info: "ℹ" };
 
   const toast = document.createElement("div");
   toast.className = `toast ${type}`;
@@ -760,7 +1017,7 @@ function showToast(message, options = {}) {
     <div class="toast-icon">${icons[type] || icons.info}</div>
     <div class="toast-content">
       ${title ? `<div class="toast-title">${title}</div>` : ""}
-      <div class="toast-message">${message}</div>
+      <div class="toast-message">${String(message).replace(/\n/g, "<br/>")}</div>
     </div>
     ${closable ? `<button class="toast-close" type="button" onclick="closeToast('${toastId}')">×</button>` : ""}
     <div class="toast-progress"></div>
@@ -769,9 +1026,7 @@ function showToast(message, options = {}) {
   container.appendChild(toast);
   setTimeout(() => toast.classList.add("show"), 10);
 
-  if (duration > 0) {
-    setTimeout(() => closeToast(toastId), duration);
-  }
+  if (duration > 0) setTimeout(() => closeToast(toastId), duration);
 
   return toastId;
 }
@@ -779,7 +1034,6 @@ function showToast(message, options = {}) {
 function closeToast(toastId) {
   const toast = document.getElementById(toastId);
   if (!toast) return;
-
   toast.classList.remove("show");
   setTimeout(() => toast.remove(), 250);
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "b930721e20fefe08600f896ab928875e",
+    "groupId": "cb2c9aa90e280ea540c38d5a645c4b20",
+    "approvalToken": "27ce381347f32bdc499b70e29408f947af3441d21d85bdb37c1d0649bad3b54f",
+    "date": "2026-02-05",
+    "type": "Sick",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "reason": "",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "status": "pending",
+    "createdAt": "2026-02-04T10:36:20.221Z"
+  }
+]

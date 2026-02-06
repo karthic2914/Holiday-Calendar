@@ -1,0 +1,32 @@
+[
+  {
+    "id": "e53a4466bc5875d3db78dada",
+    "groupId": "1a258d770b04c16cd3ebb462",
+    "token": "24e988411778173adadf576c14e8578d045d",
+    "date": "2026-02-05",
+    "type": "Sick",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "displayName": "408275a",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "status": "approved",
+    "createdAt": "2026-02-04T18:41:21.458Z",
+    "approvedAt": "2026-02-04T18:43:21.189Z"
+  },
+  {
+    "id": "a7a8fc4bffbf60478ef291e6",
+    "groupId": "1a258d770b04c16cd3ebb462",
+    "token": "24e988411778173adadf576c14e8578d045d",
+    "date": "2026-02-06",
+    "type": "Sick",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "displayName": "408275a",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "status": "approved",
+    "createdAt": "2026-02-04T18:41:21.458Z",
+    "approvedAt": "2026-02-04T18:43:21.189Z"
+  }
+]

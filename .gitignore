@@ -1,0 +1,23 @@
+# Backup files
+data/entries_backup_*.json
+entries_backup_*.json
+*_backup_*.json
+*.backup
+
+# Logs
+logs/
+*.log
+
+# Node modules
+node_modules/
+
+# Environment files
+.env
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Service executable
+nssm.exe
+start-with-sspi.bat

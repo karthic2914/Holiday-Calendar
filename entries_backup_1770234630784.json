@@ -1,0 +1,30 @@
+[
+  {
+    "id": "47bebff32d559010edbab54b",
+    "groupId": "9cb5c2f1353d6373f629c68f",
+    "token": "cee13cbb94c7231095fcd67e7324523c01df",
+    "date": "2026-02-05",
+    "type": "Leave",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "displayName": "408275a",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "status": "pending",
+    "createdAt": "2026-02-04T19:10:16.738Z"
+  },
+  {
+    "id": "96252e50e7b355d22ea2363b",
+    "groupId": "9cb5c2f1353d6373f629c68f",
+    "token": "cee13cbb94c7231095fcd67e7324523c01df",
+    "date": "2026-02-06",
+    "type": "Leave",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "displayName": "408275a",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "status": "pending",
+    "createdAt": "2026-02-04T19:10:16.738Z"
+  }
+]

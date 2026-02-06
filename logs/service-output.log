@@ -1,0 +1,473 @@
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T13:50:26.855Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T13:50:26.857Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T13:50:26.857Z] ⚠️ approval-routing.json not found - using defaults (Arun only)
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ FIX: Beautiful approval/rejection pages     │
+│  ✅ FAST UI: Email sent async                   │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+✓ Batch endpoint: /api/entry/batch
+✓ Multi-day: ONE click approves all linked dates
+✓ Manager approval: REQUIRED (not auto-approved)
+✓ Batch supports partial save (skips duplicates)
+✓ Status pages prevent double-approval/rejection
+✓ FAST UI: request returns immediately
+--------------------------------------------------
+[2026-02-05T13:50:51.480Z] 📨 sendLeaveRequestEmail CALLED {"email":"408275a@akersolutions.com","leaveType":"Leave","employeeId":"408275a"}
+[2026-02-05T13:50:51.487Z] ✓ Email transporter created: smtp.enterdir.com:25
+[2026-02-05T13:50:51.488Z] 🧪 TEST MODE enabled
+[2026-02-05T13:50:51.488Z]    testApprover: Arun.Joshi@akersolutions.com
+[2026-02-05T13:50:51.489Z]    testFyi     : Mahadevan.Sivasubramanian.Karthic@akersolutions.com
+[2026-02-05T13:50:51.489Z] 📧 Email normalization {"original":"408275a@akersolutions.com","normalized":"408275a@akersolutions.com"}
+[2026-02-05T13:50:51.490Z] 📌 ROUTING {"approver_real":"Arun.Joshi@akersolutions.com","manager_real":null,"approver_send":"Arun.Joshi@akersolutions.com","fyi_send":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","shouldSendFyi":true}
+[2026-02-05T13:50:51.730Z] ✓ SMTP verify OK
+[2026-02-05T13:50:51.934Z] ✗ Email error: No recipients defined
+✓ Email sent async: { success: false, error: 'No recipients defined' }
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T13:57:04.261Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T13:57:04.262Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T13:57:04.263Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ FIX: Beautiful approval/rejection pages     │
+│  ✅ FAST UI: Email sent async                   │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+✓ Batch endpoint: /api/entry/batch
+✓ Multi-day: ONE click approves all linked dates
+✓ Manager approval: REQUIRED (not auto-approved)
+✓ Batch supports partial save (skips duplicates)
+✓ Status pages prevent double-approval/rejection
+✓ FAST UI: request returns immediately
+--------------------------------------------------
+[2026-02-05T13:57:25.916Z] 📨 sendLeaveRequestEmail CALLED {"email":"408275a@akersolutions.com","leaveType":"Leave","employeeId":"408275a"}
+[2026-02-05T13:57:25.923Z] ✓ Email transporter created: smtp.enterdir.com:25
+[2026-02-05T13:57:25.924Z] 🧪 TEST MODE enabled
+[2026-02-05T13:57:25.925Z]    testApprover: Arun.Joshi@akersolutions.com
+[2026-02-05T13:57:25.925Z]    testFyi     : Mahadevan.Sivasubramanian.Karthic@akersolutions.com
+[2026-02-05T13:57:25.925Z] 📧 Email normalization {"original":"408275a@akersolutions.com","normalized":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com"}
+[2026-02-05T13:57:25.926Z] 📌 ROUTING {"approver_real":"Arun.Joshi@akersolutions.com","manager_real":"Arun.Joshi@akersolutions.com","approver_send":"Arun.Joshi@akersolutions.com","fyi_send":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","shouldSendFyi":true}
+[2026-02-05T13:57:26.185Z] ✓ SMTP verify OK
+[2026-02-05T13:57:26.186Z] ➡️ Sending APPROVER email now... {"to":"Arun.Joshi@akersolutions.com"}
+[2026-02-05T13:57:26.675Z] ✅ Approver email SENT {"messageId":"<d1803b9f-4a4c-f1f0-4c10-35867c7edbbd@akersolutions.com>","accepted":["Arun.Joshi@akersolutions.com"],"rejected":[],"response":"250 2.6.0 <d1803b9f-4a4c-f1f0-4c10-35867c7edbbd@akersolutions.com> [InternalId=109225313305361, Hostname=hck-mmsx03.no.enterdir.com] 6561 bytes in 0.141, 45.168 KB/sec Queued mail for delivery"}
+[2026-02-05T13:57:26.675Z] ➡️ Sending FYI email now... {"to":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com"}
+[2026-02-05T13:57:27.166Z] ✅ FYI email SENT {"messageId":"<a8a0a149-3b67-1771-0edd-6bfb6349396c@akersolutions.com>","accepted":["Mahadevan.Sivasubramanian.Karthic@akersolutions.com"],"rejected":[],"response":"250 2.6.0 <a8a0a149-3b67-1771-0edd-6bfb6349396c@akersolutions.com> [InternalId=109276852912930, Hostname=hck-mmsx04.no.enterdir.com] 6173 bytes in 0.147, 40.807 KB/sec Queued mail for delivery"}
+✓ Email sent async: { success: true }
+[2026-02-05T14:13:14.464Z] ✓ Email transporter created: smtp.enterdir.com:25
+[2026-02-05T14:13:14.465Z] 🧪 TEST MODE enabled
+[2026-02-05T14:13:14.465Z]    testApprover: Arun.Joshi@akersolutions.com
+[2026-02-05T14:13:14.466Z]    testFyi     : Mahadevan.Sivasubramanian.Karthic@akersolutions.com
+[2026-02-05T14:13:14.971Z] ✓ Approval email sent: <d7fdefc0-3f79-2432-f1f8-37b8fef8a743@akersolutions.com>
+[2026-02-05T14:14:52.058Z] 📨 sendLeaveRequestEmail CALLED {"email":"408275a@akersolutions.com","leaveType":"Leave","employeeId":"408275a"}
+[2026-02-05T14:14:52.059Z] ✓ Email transporter created: smtp.enterdir.com:25
+[2026-02-05T14:14:52.060Z] 🧪 TEST MODE enabled
+[2026-02-05T14:14:52.060Z]    testApprover: Arun.Joshi@akersolutions.com
+[2026-02-05T14:14:52.060Z]    testFyi     : Mahadevan.Sivasubramanian.Karthic@akersolutions.com
+[2026-02-05T14:14:52.061Z] 📧 Email normalization {"original":"408275a@akersolutions.com","normalized":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com"}
+[2026-02-05T14:14:52.061Z] 📌 ROUTING {"approver_real":"Arun.Joshi@akersolutions.com","manager_real":"Arun.Joshi@akersolutions.com","approver_send":"Arun.Joshi@akersolutions.com","fyi_send":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","shouldSendFyi":true}
+[2026-02-05T14:14:52.283Z] ✓ SMTP verify OK
+[2026-02-05T14:14:52.284Z] ➡️ Sending APPROVER email now... {"to":"Arun.Joshi@akersolutions.com"}
+[2026-02-05T14:14:52.792Z] ✅ Approver email SENT {"messageId":"<140771e3-8b35-239e-28d2-c0069c38c436@akersolutions.com>","accepted":["Arun.Joshi@akersolutions.com"],"rejected":[],"response":"250 2.6.0 <140771e3-8b35-239e-28d2-c0069c38c436@akersolutions.com> [InternalId=109281147879560, Hostname=hck-mmsx04.no.enterdir.com] 6672 bytes in 0.141, 46.187 KB/sec Queued mail for delivery"}
+[2026-02-05T14:14:52.793Z] ➡️ Sending FYI email now... {"to":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com"}
+[2026-02-05T14:14:53.330Z] ✅ FYI email SENT {"messageId":"<7e8720ee-833a-2244-f8ee-bf1eac348631@akersolutions.com>","accepted":["Mahadevan.Sivasubramanian.Karthic@akersolutions.com"],"rejected":[],"response":"250 2.6.0 <7e8720ee-833a-2244-f8ee-bf1eac348631@akersolutions.com> [InternalId=109281147879561, Hostname=hck-mmsx04.no.enterdir.com] 6288 bytes in 0.155, 39.468 KB/sec Queued mail for delivery"}
+✓ Email sent async: { success: true }
+[2026-02-05T14:15:25.045Z] ✓ Email transporter created: smtp.enterdir.com:25
+[2026-02-05T14:15:25.045Z] 🧪 TEST MODE enabled
+[2026-02-05T14:15:25.046Z]    testApprover: Arun.Joshi@akersolutions.com
+[2026-02-05T14:15:25.046Z]    testFyi     : Mahadevan.Sivasubramanian.Karthic@akersolutions.com
+[2026-02-05T14:15:25.555Z] ✓ Approval email sent: <ecec2731-968b-f219-8ed1-2fa5d12fe487@akersolutions.com>
+[2026-02-05T14:18:47.937Z] 📨 sendLeaveRequestEmail CALLED {"email":"408275a@akersolutions.com","leaveType":"Work From Stavanger","employeeId":"408275a"}
+[2026-02-05T14:18:47.938Z] ✓ Email transporter created: smtp.enterdir.com:25
+[2026-02-05T14:18:47.938Z] 🧪 TEST MODE enabled
+[2026-02-05T14:18:47.939Z]    testApprover: Arun.Joshi@akersolutions.com
+[2026-02-05T14:18:47.939Z]    testFyi     : Mahadevan.Sivasubramanian.Karthic@akersolutions.com
+[2026-02-05T14:18:47.940Z] 📧 Email normalization {"original":"408275a@akersolutions.com","normalized":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com"}
+[2026-02-05T14:18:47.940Z] 📌 ROUTING {"approver_real":"Arun.Joshi@akersolutions.com","manager_real":"Arun.Joshi@akersolutions.com","approver_send":"Arun.Joshi@akersolutions.com","fyi_send":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","shouldSendFyi":true}
+[2026-02-05T14:18:48.161Z] ✓ SMTP verify OK
+[2026-02-05T14:18:48.162Z] ➡️ Sending APPROVER email now... {"to":"Arun.Joshi@akersolutions.com"}
+[2026-02-05T14:18:48.626Z] ✅ Approver email SENT {"messageId":"<ff945a4c-c7fa-2a71-0222-154b705733ad@akersolutions.com>","accepted":["Arun.Joshi@akersolutions.com"],"rejected":[],"response":"250 2.6.0 <ff945a4c-c7fa-2a71-0222-154b705733ad@akersolutions.com> [InternalId=109229608272057, Hostname=hck-mmsx03.no.enterdir.com] 6775 bytes in 0.138, 47.922 KB/sec Queued mail for delivery"}
+[2026-02-05T14:18:48.627Z] ➡️ Sending FYI email now... {"to":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com"}
+[2026-02-05T14:18:49.112Z] ✅ FYI email SENT {"messageId":"<6d73d1d0-2fdb-c2fe-928e-db0455ecfffd@akersolutions.com>","accepted":["Mahadevan.Sivasubramanian.Karthic@akersolutions.com"],"rejected":[],"response":"250 2.6.0 <6d73d1d0-2fdb-c2fe-928e-db0455ecfffd@akersolutions.com> [InternalId=109281147879614, Hostname=hck-mmsx04.no.enterdir.com] 6390 bytes in 0.147, 42.254 KB/sec Queued mail for delivery"}
+✓ Email sent async: { success: true }
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T16:12:30.258Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T16:12:30.260Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T16:12:30.261Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ FIX: Beautiful approval/rejection pages     │
+│  ✅ FAST UI: Email sent async                   │
+│  ✅ SSO: Dynamic user from EasyAuth headers     │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+✓ Batch endpoint: /api/entry/batch
+✓ Multi-day: ONE click approves all linked dates
+✓ Manager approval: REQUIRED (not auto-approved)
+✓ Batch supports partial save (skips duplicates)
+✓ Status pages prevent double-approval/rejection
+✓ FAST UI: request returns immediately
+--------------------------------------------------
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T16:57:11.669Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T16:57:11.671Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T16:57:11.672Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Dynamic user from headers              │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T18:05:30.722Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T18:05:30.724Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T18:05:30.725Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI                │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: disabled (set USE_SSPI=true)
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T18:12:04.934Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T18:12:04.936Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T18:12:04.937Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+ℹ️ SSPI disabled. Set USE_SSPI=true to enable Windows Integrated Auth.
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI                │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: disabled (set USE_SSPI=true)
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T19:57:17.438Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T19:57:17.440Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T19:57:17.441Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI                │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: disabled (set USE_SSPI=true)
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T20:07:31.744Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T20:07:31.746Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T20:07:31.747Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI                │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: disabled (set USE_SSPI=true)
+SSPI middleware: NOT loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T20:15:51.929Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T20:15:51.931Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T20:15:51.932Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI                │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T20:26:48.948Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T20:26:48.950Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T20:26:48.950Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T20:35:07.802Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T20:35:07.804Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T20:35:07.805Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T21:47:09.714Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T21:47:09.716Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T21:47:09.716Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T21:58:48.981Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T21:58:48.983Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T21:58:48.984Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T23:00:06.057Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T23:00:06.058Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T23:00:06.059Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T23:30:57.408Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T23:30:57.410Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T23:30:57.411Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-05T23:59:19.437Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-05T23:59:19.439Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-05T23:59:19.440Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-06T00:02:41.125Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-06T00:02:41.127Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-06T00:02:41.128Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+Terminate batch job (Y/N)? ✅ LOADED emailService.js FROM: C:\HolidayApp\emailService.js
+[2026-02-06T00:04:52.431Z] ✓ Email config loaded: C:\HolidayApp\email-config.json
+[2026-02-06T00:04:52.433Z] 📌 Email config (effective): {"enabled":true,"testMode":true,"testApprover":"Arun.Joshi@akersolutions.com","testFyi":"Mahadevan.Sivasubramanian.Karthic@akersolutions.com","serverUrl":"http://hcg-mapp105:3001","smtp":{"host":"smtp.enterdir.com","port":25,"secure":false,"auth":false},"from":"noreply@akersolutions.com","envelopeFrom":"noreply@akersolutions.com"}
+[2026-02-06T00:04:52.434Z] ✓ Routing loaded: C:\HolidayApp\employee-routing.json
+✅ SSPI enabled (node-expose-sspi) via sso.auth().
+
+┌────────────────────────────────────────────────┐
+│  SMART MULTI-DAY VERSION - FAST UI              │
+│  Holiday Calendar - ONE Email Per Request       │
+│  ✅ SSO: Headers + Optional SSPI (FIXED)        │
+└────────────────────────────────────────────────┘
+Server: http://hcg-mapp105:3001
+Roles: 3 configured
+Users: 3 admins
+SSPI: ENABLED (set USE_SSPI=true)
+SSPI middleware: loaded
+✓ Batch endpoint: /api/entry/batch
+✓ Debug: /api/debug/headers
+--------------------------------------------------
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+✓ Using primary SMTP from proxyAddresses: mahadevan.sivasubramanian.karthic@akersolutions.com
+Terminate batch job (Y/N)? 

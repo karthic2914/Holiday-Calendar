@@ -1,0 +1,242 @@
+/* ═══════════════════════════════════════════════════════════
+   🎨 TYPE-BASED STATUS COLORS FOR CALENDAR ENTRIES
+   ═══════════════════════════════════════════════════════════
+   
+   CONCEPT:
+   - PENDING = Light/Pastel colors
+   - APPROVED = Dark/Bold colors
+   - Type determines the hue (blue for Leave, orange for Sick, etc.)
+   - Status determines the intensity (light=pending, dark=approved)
+   
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════
+   LEAVE - BLUE TONES
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.status-pending.leave {
+  background-color: #DBEAFE !important;  /* Light blue - pending */
+  color: #1E40AF !important;
+  border: 1px solid #3B82F6 !important;
+  font-weight: 600;
+}
+
+.entry-badge.status-approved.leave {
+  background-color: #2563EB !important;  /* Dark blue - approved */
+  color: white !important;
+  border: 1px solid #1E40AF !important;
+  font-weight: 600;
+}
+
+.calendar-day.has-user-entry.status-pending.leave {
+  border-left: 4px solid #3B82F6 !important;
+}
+
+.calendar-day.has-user-entry.status-approved.leave {
+  border-left: 4px solid #1E40AF !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SICK - ORANGE TONES
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.status-pending.sick {
+  background-color: #FED7AA !important;  /* Light orange - pending */
+  color: #C2410C !important;
+  border: 1px solid #F97316 !important;
+  font-weight: 600;
+}
+
+.entry-badge.status-approved.sick {
+  background-color: #EA580C !important;  /* Dark orange - approved */
+  color: white !important;
+  border: 1px solid #C2410C !important;
+  font-weight: 600;
+}
+
+.calendar-day.has-user-entry.status-pending.sick {
+  border-left: 4px solid #F97316 !important;
+}
+
+.calendar-day.has-user-entry.status-approved.sick {
+  border-left: 4px solid #C2410C !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WFH - GREEN TONES
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.status-pending.wfh {
+  background-color: #D1FAE5 !important;  /* Light green - pending */
+  color: #065F46 !important;
+  border: 1px solid #10B981 !important;
+  font-weight: 600;
+}
+
+.entry-badge.status-approved.wfh {
+  background-color: #059669 !important;  /* Dark green - approved */
+  color: white !important;
+  border: 1px solid #047857 !important;
+  font-weight: 600;
+}
+
+.calendar-day.has-user-entry.status-pending.wfh {
+  border-left: 4px solid #10B981 !important;
+}
+
+.calendar-day.has-user-entry.status-approved.wfh {
+  border-left: 4px solid #047857 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WORK TRAVEL - PURPLE TONES
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.status-pending.work-travel {
+  background-color: #EDE9FE !important;  /* Light purple - pending */
+  color: #6B21A8 !important;
+  border: 1px solid #8B5CF6 !important;
+  font-weight: 600;
+}
+
+.entry-badge.status-approved.work-travel {
+  background-color: #7C3AED !important;  /* Dark purple - approved */
+  color: white !important;
+  border: 1px solid #6B21A8 !important;
+  font-weight: 600;
+}
+
+.calendar-day.has-user-entry.status-pending.work-travel {
+  border-left: 4px solid #8B5CF6 !important;
+}
+
+.calendar-day.has-user-entry.status-approved.work-travel {
+  border-left: 4px solid #6B21A8 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WORK FROM STAVANGER - PURPLE TONES
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.status-pending.work-from-stavanger {
+  background-color: #EDE9FE !important;
+  color: #6B21A8 !important;
+  border: 1px solid #9B59B6 !important;
+  font-weight: 600;
+}
+
+.entry-badge.status-approved.work-from-stavanger {
+  background-color: #8E44AD !important;
+  color: white !important;
+  border: 1px solid #6B21A8 !important;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WORK FROM OSLO - TEAL TONES
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.status-pending.work-from-oslo {
+  background-color: #CCFBF1 !important;
+  color: #115E59 !important;
+  border: 1px solid #14B8A6 !important;
+  font-weight: 600;
+}
+
+.entry-badge.status-approved.work-from-oslo {
+  background-color: #0F766E !important;
+  color: white !important;
+  border: 1px solid #115E59 !important;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PUBLIC HOLIDAY - RED TONES
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.public-holiday {
+  background-color: #B91C1C !important;  /* Always dark red */
+  color: white !important;
+  border: 1px solid #991B1B !important;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   REJECTED - RED (SAME FOR ALL TYPES)
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge.status-rejected {
+  background-color: #FEE2E2 !important;  /* Light red with strikethrough */
+  color: #991B1B !important;
+  border: 1px solid #EF4444 !important;
+  text-decoration: line-through !important;
+  opacity: 0.7 !important;
+  font-weight: 600;
+}
+
+.calendar-day.has-user-entry.status-rejected {
+  border-left: 4px solid #EF4444 !important;
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HOVER EFFECTS
+   ═══════════════════════════════════════════════════════════ */
+
+.entry-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.entry-badge.status-rejected:hover {
+  opacity: 0.9 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FLATPICKR DATE PICKER COLORS
+   ═══════════════════════════════════════════════════════════ */
+
+.flatpickr-day.has-user-entry.status-pending {
+  background: #DBEAFE !important;
+  color: #1E40AF !important;
+  border: 2px solid #3B82F6 !important;
+}
+
+.flatpickr-day.has-user-entry.status-approved {
+  background: #D1FAE5 !important;
+  color: #065F46 !important;
+  border: 2px solid #10B981 !important;
+}
+
+.flatpickr-day.has-user-entry.status-rejected {
+  background: #FEE2E2 !important;
+  color: #991B1B !important;
+  border: 2px solid #EF4444 !important;
+  text-decoration: line-through !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COLOR LEGEND
+   ═══════════════════════════════════════════════════════════
+   
+   PENDING (Light):
+   - Leave:              Light Blue (#DBEAFE)
+   - Sick:               Light Orange (#FED7AA)
+   - WFH:                Light Green (#D1FAE5)
+   - Work Travel:        Light Purple (#EDE9FE)
+   - Work From Stavanger: Light Purple (#EDE9FE)
+   - Work From Oslo:     Light Teal (#CCFBF1)
+   
+   APPROVED (Dark):
+   - Leave:              Dark Blue (#2563EB)
+   - Sick:               Dark Orange (#EA580C)
+   - WFH:                Dark Green (#059669)
+   - Work Travel:        Dark Purple (#7C3AED)
+   - Work From Stavanger: Dark Purple (#8E44AD)
+   - Work From Oslo:     Dark Teal (#0F766E)
+   
+   REJECTED (All types): Light Red with strikethrough (#FEE2E2)
+   PUBLIC HOLIDAY:       Dark Red (#B91C1C)
+   
+   ═══════════════════════════════════════════════════════════ */

@@ -7,43 +7,18 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  
-  <!-- ✅ Flatpickr Date Picker -->
+
+  <!-- Flatpickr -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body>
-<div id="loadingScreen" style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(7, 29, 43, 0.95);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  ">
-    <div style="
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(255,255,255,0.3);
-      border-top-color: #00A0DF;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    "></div>
-    <p style="color: white; margin-top: 20px; font-size: 16px;">Loading Holiday Calendar...</p>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="spinner"></div>
+    <p>Loading Holiday Calendar...</p>
   </div>
 
-  <style>
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
-  
   <header class="header">
     <div class="header-left">
       <h1 class="department-name">VISIONEERING</h1>
@@ -73,7 +48,7 @@
               <input type="text" id="newEmployeeId" placeholder="Employee ID (e.g., 408275a)">
               <input type="text" id="newDisplayName" placeholder="Display Name (e.g., Hajo)">
               <select id="newUserRole">
-                <option>Select Role...</option>
+                <option value="">Select Role...</option>
                 <option value="admin">Admin</option>
                 <option value="manager">Manager</option>
                 <option value="developer">Developer</option>
@@ -84,7 +59,6 @@
 
           <div class="info-note">
             ℹ️ All users are <strong>developers by default</strong>. Use this form to add users and assign Manager or Admin roles.
-            Only administrators shown below can manage user roles.
           </div>
         </div>
 
@@ -101,9 +75,7 @@
       <div class="controls-left">
         <div class="month-nav">
           <button type="button" onclick="changeMonth(-1)">←</button>
-
           <div class="month-display" id="currentMonth">February 2026</div>
-
           <button type="button" onclick="changeMonth(1)">→</button>
         </div>
 
@@ -133,16 +105,19 @@
       <div id="calendar" class="calendar-days"></div>
     </div>
 
-    <div class="legend">
-      <div class="legend-item"><span class="legend-color" style="background: var(--holiday);"></span><span>Public Holiday</span></div>
-      <div class="legend-item"><span class="legend-color" style="background: var(--leave);"></span><span>Leave</span></div>
-      <div class="legend-item"><span class="legend-color" style="background: var(--sick);"></span><span>Sick</span></div>
-      <div class="legend-item"><span class="legend-color" style="background: var(--wfh);"></span><span>WFH</span></div>
-      <div class="legend-item"><span class="legend-color" style="background: var(--travel);"></span><span>Work Travel</span></div>
-    </div>
+	<div class="legend">
+	  <div class="legend-item"><span class="legend-color holiday"></span><span>Public Holiday</span></div>
+	  <div class="legend-item"><span class="legend-color leave"></span><span>Leave</span></div>
+	  <div class="legend-item"><span class="legend-color sick"></span><span>Sick</span></div>
+	  <div class="legend-item"><span class="legend-color wfh"></span><span>WFH</span></div>
+	  <div class="legend-item"><span class="legend-color stavanger"></span><span>Work From Stavanger</span></div>
+	  <div class="legend-item"><span class="legend-color oslo"></span><span>Work From Oslo</span></div>
+	  <div class="legend-item"><span class="legend-color travel"></span><span>Work Travel</span></div>
+	</div>
 
   </main>
 
+  <!-- Modal -->
   <div class="modal" id="entryModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -153,21 +128,23 @@
       <div class="modal-body">
         <div class="form-group">
           <label>Date</label>
-          <!-- ✅ CHANGED: type="text" with readonly, Flatpickr will handle it -->
-          <input type="text" id="entryDate" placeholder="Select date..." required readonly>
+          <input type="text" id="entryDate" placeholder="Select date or date range..." required readonly>
+          <div class="date-selection-help">
+            💡 Click once for single day, or click start and end for range (weekends auto-skipped)
+          </div>
         </div>
 
         <div class="form-group">
           <label>Type</label>
-          <select id="entryType" required data-selected="Leave">
-            <option value="Leave">🔵 Leave</option>
-            <option value="Sick">🟠 Sick</option>
-            <option value="WFH">🟢 Work From Home</option>
-            <option value="Work From Stavanger">🏢 Work From Stavanger</option>
-            <option value="Work From Oslo">🏢 Work From Oslo</option>
-            <option value="Work Travel">🟣 Work Travel</option>
-            <option value="Public Holiday">🔴 Public Holiday</option>
-          </select>
+			<select id="entryType" required>
+			  <option value="Leave">🔵 Leave</option>
+			  <option value="Sick">🟠 Sick</option>
+			  <option value="WFH">🟢 Work From Home</option>
+			  <option value="Work From Stavanger">🟣 Work From Stavanger</option>
+			  <option value="Work From Oslo">🟢 Work From Oslo</option>
+			  <option value="Work Travel">🟣 Work Travel</option>
+			  <option value="Public Holiday">🔴 Public Holiday</option>
+			</select>
         </div>
 
         <div class="form-group">
@@ -187,6 +164,8 @@
       </div>
     </div>
   </div>
+
+  <div id="toastHost"></div>
 
   <script src="app.js"></script>
 </body>

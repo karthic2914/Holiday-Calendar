@@ -1,13 +1,10 @@
 {
   "enabled": true,
   "testMode": true,
-  "testEmail": "Mahadevan.Sivasubramanian.Karthic@akersolutions.com",
+  "testApprover": "Arun.Joshi@akersolutions.com",
+  "testFyi": "Mahadevan.Sivasubramanian.Karthic@akersolutions.com",
   "serverUrl": "http://hcg-mapp105:3001",
-  "smtp": {
-    "host": "smtp.enterdir.com",
-    "port": 25,
-    "secure": false
-  },
+  "smtp": { "host": "smtp.enterdir.com", "port": 25, "secure": false, "auth": false, "user": "", "pass": "" },
   "from": "noreply@akersolutions.com",
   "envelopeFrom": "noreply@akersolutions.com"
 }

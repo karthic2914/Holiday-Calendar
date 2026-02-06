@@ -1,0 +1,22 @@
+{
+  "mainApprover": "Arun.Joshi@akersolutions.com",
+  "approverOnlyButtons": true,
+  "managers": {
+    "Erik.Tysdal.Egaas@akersolutions.com": [
+      "Aron.Nostvold.Hansen@akersolutions.com",
+      "Odd.Vidar.Hobberstad@akersolutions.com"
+    ],
+    "Orjan.Brekke@akersolutions.com": [
+      "Naz.Kozak@akersolutions.com",
+      "Negin.Rabiee@akersolutions.com"
+    ],
+    "Arun.Joshi@akersolutions.com": [
+      "Mahadevan.Sivasubramanian.Karthic@akersolutions.com",
+      "Hajo.Hoetjes@akersolutions.com",
+      "Jiafeng.Xu@akersolutions.com",
+      "Richard.Barlow@akersolutions.com",
+      "Orjan.Brekke@akersolutions.com",
+      "Erik.Tysdal.Egaas@akersolutions.com"
+    ]
+  }
+}

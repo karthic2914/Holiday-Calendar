@@ -1,3 +1,7 @@
+/* ===============================
+   GLOBAL RESET + VARIABLES
+   =============================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +9,6 @@
 }
 
 :root {
-    /* Aker Solutions Brand Colors */
     --aker-navy: #071D2B;
     --aker-blue: #00A0DF;
     --aker-sky: #CFEFFF;
@@ -16,14 +19,16 @@
     --text-muted: #7E8C94;
     --border-light: #E8EEF2;
     --border: #D1DCE3;
-    
-    /* Calendar colors */
     --holiday: #E63946;
     --leave: #2B7FD6;
     --sick: #FF8C42;
     --wfh: #00B894;
     --travel: #6C5CE7;
 }
+
+/* ===============================
+   LAYOUT
+   =============================== */
 
 body {
     font-family: 'Inter', sans-serif;
@@ -39,9 +44,9 @@ body {
     margin: 0 auto;
 }
 
-/* ========================================
+/* ===============================
    HEADER
-   ======================================== */
+   =============================== */
 
 .header {
     background: var(--aker-navy);
@@ -96,19 +101,15 @@ body {
     margin-bottom: 6px !important;
 }
 
-/* ========================================
-   CALENDAR WRAPPER
-   ======================================== */
+/* ===============================
+   MAIN WRAPPER + CONTROLS
+   =============================== */
 
 .calendar-wrapper {
     background: var(--white);
     padding: 20px 60px 60px;
     border-top: 1px solid var(--border-light);
 }
-
-/* ========================================
-   CONTROLS
-   ======================================== */
 
 .controls {
     display: flex;
@@ -208,9 +209,9 @@ body {
     box-shadow: 0 8px 20px rgba(7, 29, 43, 0.15);
 }
 
-/* ========================================
+/* ===============================
    CALENDAR GRID
-   ======================================== */
+   =============================== */
 
 .calendar {
     display: grid;
@@ -325,6 +326,12 @@ body {
     gap: 4px;
 }
 
+/* ===============================
+   ENTRY BADGES
+   Type = background
+   Status = left border only
+   =============================== */
+
 .entry-badge {
     font-size: 11px;
     padding: 4px 8px;
@@ -334,8 +341,15 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    /* status indicator */
+    border-left: 4px solid transparent;
+    padding-left: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+/* Type colors (background) */
 .entry-badge.public-holiday { background: var(--holiday); }
 .entry-badge.holiday { background: var(--holiday); }
 .entry-badge.leave { background: var(--leave); }
@@ -346,28 +360,50 @@ body {
 .entry-badge.work-from-stavanger { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
 .entry-badge.work-from-oslo { background: linear-gradient(135deg, #16a085, #1abc9c); }
 
-/* ========================================
-   LEGEND
-   ======================================== */
+/* Status colors (border only, so it doesn't fight type) */
+.entry-badge.status-pending { border-left-color: #3B82F6; }
+.entry-badge.status-approved { border-left-color: #10B981; }
+.entry-badge.status-rejected {
+    border-left-color: #EF4444;
+    text-decoration: line-through;
+    opacity: 0.75;
+}
 
-.legend {
+/* ===============================
+   DAY STATUS INDICATORS (current user)
+   =============================== */
+
+.calendar-day.has-user-entry.status-pending {
+    border: 2px solid rgba(59, 130, 246, 0.35);
+}
+
+.calendar-day.has-user-entry.status-approved {
+    border: 2px solid rgba(16, 185, 129, 0.35);
+}
+
+.calendar-day.has-user-entry.status-rejected {
+    border: 2px solid rgba(239, 68, 68, 0.35);
+}
+
+/* ===============================
+   LEGEND
+   =============================== */
+   
+ .legend {
     display: flex;
-    justify-content: center;
-    gap: 32px;
     flex-wrap: wrap;
-    padding: 24px;
-    background: var(--aker-light);
-    border-radius: 12px;
-    border: 1px solid var(--border-light);
+    gap: 16px;
+    justify-content: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text-medium);
-    font-weight: 500;
+    gap: 8px;
 }
 
 .legend-color {
@@ -377,9 +413,34 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* ========================================
+/* Legend Color Boxes - Specific Types */
+.legend-item .legend-color.holiday {
+  background-color: #EF4444 !important; /* Red */
+}
+.legend-item .legend-color.leave {
+  background-color: #3B82F6 !important; /* Blue */
+}
+.legend-item .legend-color.sick {
+  background-color: #F97316 !important; /* Orange */
+}
+.legend-item .legend-color.wfh {
+  background-color: #14B8A6 !important; /* Teal */
+}
+.legend-item .legend-color.stavanger {
+  background-color: #9b59b6 !important; /* Purple */
+}
+.legend-item .legend-color.oslo {
+  background-color: #16a085 !important; /* Dark Teal */
+}
+.legend-item .legend-color.travel,
+.legend-item .legend-color.work_travel,
+.legend-item .legend-color.worktravel {
+  background-color: #8B5CF6 !important; /* Violet */
+}
+
+/* ===============================
    MODAL
-   ======================================== */
+   =============================== */
 
 .modal {
     display: none;
@@ -496,6 +557,7 @@ body {
     border: none;
 }
 
+/* Buttons */
 .btn-primary,
 #saveEntryBtn,
 button.btn-primary {
@@ -566,14 +628,35 @@ button.btn-secondary {
     outline-offset: 2px;
 }
 
-/* ========================================
-   TYPE DROPDOWN
-   ======================================== */
+/* Input icon helper */
+.input-with-icon {
+    position: relative;
+    display: block;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding-right: 45px !important;
+}
+
+.input-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    pointer-events: none;
+    color: #00A0DF;
+}
+
+/* ===============================
+   TYPE DROPDOWN STYLING
+   =============================== */
 
 select#entryType {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
     width: 100%;
     padding: 14px 40px 14px 20px;
     font-size: 15px;
@@ -583,9 +666,10 @@ select#entryType {
     border: 2px solid #E5E7EB;
     border-radius: 10px;
     background-color: white;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%23666' d='M7 10L2 5h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%2300A0DF' d='M8 11L3 6h10z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 16px 16px !important;
     cursor: pointer;
     transition: all 0.25s ease;
     border-left-width: 6px;
@@ -604,48 +688,92 @@ select#entryType:focus {
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-select#entryType option {
-    padding: 14px 20px;
-    font-size: 15px;
-    line-height: 2;
-    color: #1F2937;
-    font-weight: 500;
-    background: white;
-}
-
+/* Type-specific left border for selected value */
 select#entryType[data-selected="Leave"] {
     border-left-color: #3B82F6 !important;
     background-color: #EFF6FF;
 }
-
 select#entryType[data-selected="Sick"] {
     border-left-color: #F97316 !important;
     background-color: #FFF7ED;
 }
-
 select#entryType[data-selected="WFH"] {
     border-left-color: #14B8A6 !important;
     background-color: #F0FDFA;
 }
-
+select#entryType[data-selected="Work From Stavanger"] {
+    border-left-color: #9b59b6 !important;
+    background-color: #F3E5F5;
+}
+select#entryType[data-selected="Work From Oslo"] {
+    border-left-color: #16a085 !important;
+    background-color: #E0F2F1;
+}
 select#entryType[data-selected="Work Travel"] {
     border-left-color: #8B5CF6 !important;
     background-color: #FAF5FF;
 }
-
 select#entryType[data-selected="Public Holiday"] {
     border-left-color: #EF4444 !important;
     background-color: #FEF2F2;
 }
 
-/* ========================================
-   FLATPICKR DATE PICKER CUSTOM STYLING
-   ======================================== */
+/* ===================================
+   DROPDOWN OPTIONS - Colored Dots
+   =================================== */
+
+select#entryType option {
+    padding: 14px 20px 14px 30px; /* Extra left padding for colored dot */
+    font-size: 15px;
+    line-height: 2;
+    color: #1F2937;
+    font-weight: 500;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 12px 12px;
+}
+
+/* Create colored dots using radial gradients */
+select#entryType option[value="Leave"] {
+    background-image: radial-gradient(circle, #3B82F6 40%, transparent 40%);
+}
+
+select#entryType option[value="Sick"] {
+    background-image: radial-gradient(circle, #F97316 40%, transparent 40%);
+}
+
+select#entryType option[value="WFH"] {
+    background-image: radial-gradient(circle, #14B8A6 40%, transparent 40%);
+}
+
+select#entryType option[value="Work From Stavanger"] {
+    background-image: radial-gradient(circle, #9b59b6 40%, transparent 40%);
+}
+
+select#entryType option[value="Work From Oslo"] {
+    background-image: radial-gradient(circle, #16a085 40%, transparent 40%);
+}
+
+select#entryType option[value="Work Travel"] {
+    background-image: radial-gradient(circle, #8B5CF6 40%, transparent 40%);
+}
+
+select#entryType option[value="Public Holiday"] {
+    background-image: radial-gradient(circle, #EF4444 40%, transparent 40%);
+}
+
+/* ===============================
+   FLATPICKR STYLING
+   =============================== */
 
 .flatpickr-calendar {
     border-radius: 12px !important;
     box-shadow: 0 24px 80px rgba(7, 29, 43, 0.4) !important;
     border: 2px solid var(--aker-blue) !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
 }
 
 .flatpickr-day.selected {
@@ -675,23 +803,121 @@ select#entryType[data-selected="Public Holiday"] {
     opacity: 0.5 !important;
 }
 
+/* Flatpickr status markers for existing entries */
 .flatpickr-day.has-user-entry {
-    background: #FEE2E2 !important;
-    color: #991B1B !important;
     position: relative;
+    padding-top: 8px !important;
 }
 
 .flatpickr-day.has-user-entry::after {
-    content: '✓';
     position: absolute;
     top: 2px;
-    right: 4px;
-    font-size: 10px;
-    color: #DC2626;
+    right: 2px;
+    font-size: 11px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+}
+
+/* pending */
+.flatpickr-day.has-user-entry.pending {
+    background: #FEF3C7 !important;
+    color: #92400E !important;
+    border: 2px solid #F59E0B !important;
+}
+.flatpickr-day.has-user-entry.pending::after {
+    content: '⏳';
+    color: #F59E0B;
+}
+
+/* approved */
+.flatpickr-day.has-user-entry.approved {
+    background: #D1FAE5 !important;
+    color: #065F46 !important;
+    border: 2px solid #10B981 !important;
+}
+.flatpickr-day.has-user-entry.approved::after {
+    content: '✓';
+    color: #10B981;
+    font-weight: bold;
+}
+
+/* rejected */
+.flatpickr-day.has-user-entry.rejected {
+    background: #FEE2E2 !important;
+    color: #991B1B !important;
+    border: 2px solid #EF4444 !important;
+}
+.flatpickr-day.has-user-entry.rejected::after {
+    content: '✗';
+    color: #EF4444;
+    font-weight: bold;
+}
+
+/* Range selection visuals */
+.flatpickr-day.inRange {
+    background: rgba(0, 160, 223, 0.15) !important;
+    border-color: rgba(0, 160, 223, 0.3) !important;
+    box-shadow: none !important;
+}
+
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+    background: var(--aker-blue) !important;
+    color: white !important;
+    border-color: var(--aker-blue) !important;
+    font-weight: bold !important;
+}
+
+.flatpickr-day.startRange.startRange,
+.flatpickr-day.endRange.endRange {
+    border-radius: 8px !important;
+}
+
+.flatpickr-day.inRange.flatpickr-disabled {
+    background: repeating-linear-gradient(
+        45deg,
+        #F8FAFB,
+        #F8FAFB 10px,
+        #E8EEF2 10px,
+        #E8EEF2 20px
+    ) !important;
+    opacity: 0.6 !important;
+}
+
+.flatpickr-day.has-user-entry.flatpickr-disabled {
+    cursor: not-allowed !important;
+    opacity: 0.8 !important;
+}
+
+/* Drag feedback */
+.flatpickr-day {
+    cursor: pointer !important;
+    transition: all 0.1s ease !important;
+}
+
+.flatpickr-day:not(.flatpickr-disabled):hover {
+    transform: scale(1.05) !important;
+}
+
+.flatpickr-day.selected {
+    animation: selectPulse 0.2s ease;
+}
+
+@keyframes selectPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
 }
 
 #entryDate {
     cursor: pointer;
+    min-width: 250px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 
 #entryDate:focus {
@@ -700,9 +926,16 @@ select#entryType[data-selected="Public Holiday"] {
     box-shadow: 0 0 0 3px rgba(0, 160, 223, 0.1);
 }
 
-/* ========================================
-   TOAST NOTIFICATIONS
-   ======================================== */
+.date-selection-help {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* ===============================
+   TOASTS
+   =============================== */
 
 .toast-container {
     position: fixed;
@@ -769,25 +1002,10 @@ select#entryType[data-selected="Public Holiday"] {
     flex-shrink: 0;
 }
 
-.toast.success .toast-icon {
-    background: #10B981;
-    color: white;
-}
-
-.toast.error .toast-icon {
-    background: #EF4444;
-    color: white;
-}
-
-.toast.warning .toast-icon {
-    background: #F59E0B;
-    color: white;
-}
-
-.toast.info .toast-icon {
-    background: #3B82F6;
-    color: white;
-}
+.toast.success .toast-icon { background: #10B981; color: white; }
+.toast.error .toast-icon { background: #EF4444; color: white; }
+.toast.warning .toast-icon { background: #F59E0B; color: white; }
+.toast.info .toast-icon { background: #3B82F6; color: white; }
 
 .toast-content {
     flex: 1;
@@ -836,24 +1054,13 @@ select#entryType[data-selected="Public Holiday"] {
     height: 3px;
     background: currentColor;
     opacity: 0.3;
-    animation: toastProgress 3s linear forwards;
+    animation: toastProgress 5s linear forwards;
 }
 
-.toast.success .toast-progress {
-    color: #10B981;
-}
-
-.toast.error .toast-progress {
-    color: #EF4444;
-}
-
-.toast.warning .toast-progress {
-    color: #F59E0B;
-}
-
-.toast.info .toast-progress {
-    color: #3B82F6;
-}
+.toast.success .toast-progress { color: #10B981; }
+.toast.error .toast-progress { color: #EF4444; }
+.toast.warning .toast-progress { color: #F59E0B; }
+.toast.info .toast-progress { color: #3B82F6; }
 
 @keyframes toastProgress {
     from { width: 100%; }
@@ -871,9 +1078,9 @@ select#entryType[data-selected="Public Holiday"] {
     }
 }
 
-/* ========================================
+/* ===============================
    ADMIN PANEL
-   ======================================== */
+   =============================== */
 
 .admin-panel {
     background: #F7FAFC;
@@ -1033,20 +1240,9 @@ select#entryType[data-selected="Public Holiday"] {
     width: fit-content;
 }
 
-.user-role.admin {
-    background: #FED7D7;
-    color: #C53030;
-}
-
-.user-role.manager {
-    background: #BEE3F8;
-    color: #2C5282;
-}
-
-.user-role.developer {
-    background: #C6F6D5;
-    color: #22543D;
-}
+.user-role.admin { background: #FED7D7; color: #C53030; }
+.user-role.manager { background: #BEE3F8; color: #2C5282; }
+.user-role.developer { background: #C6F6D5; color: #22543D; }
 
 .user-actions {
     display: flex;
@@ -1097,9 +1293,9 @@ select#entryType[data-selected="Public Holiday"] {
     color: var(--text-muted);
 }
 
-/* ========================================
+/* ===============================
    CONFIRMATION MODAL
-   ======================================== */
+   =============================== */
 
 .confirmation-modal-overlay {
     position: fixed;
@@ -1284,24 +1480,13 @@ select#entryType[data-selected="Public Holiday"] {
     margin-top: 4px;
 }
 
-/* ========================================
+/* ===============================
    ANIMATIONS
-   ======================================== */
+   =============================== */
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 
 @keyframes slideUpBounce {
@@ -1319,28 +1504,24 @@ select#entryType[data-selected="Public Holiday"] {
     }
 }
 
-@keyframes spinner {
-    to { transform: rotate(360deg); }
-}
-
-/* ========================================
+/* ===============================
    RESPONSIVE
-   ======================================== */
+   =============================== */
 
 @media (max-width: 1200px) {
     .admin-form .form-row {
         grid-template-columns: 1fr;
     }
-    
+
     .user-item {
         grid-template-columns: 1fr;
         gap: 12px;
     }
-    
+
     .user-actions {
         justify-content: stretch;
     }
-    
+
     .btn-edit-user,
     .btn-delete-user {
         flex: 1;
@@ -1372,23 +1553,23 @@ select#entryType[data-selected="Public Holiday"] {
         min-height: 80px;
         padding: 8px;
     }
-    
+
     .toast-container {
         bottom: 16px;
         right: 16px;
         left: 16px;
     }
-    
+
     .toast {
         min-width: auto;
         max-width: 100%;
     }
-    
+
     .form-actions,
     .modal-footer {
         flex-direction: column-reverse;
     }
-    
+
     .form-actions button,
     .modal-footer button {
         width: 100%;

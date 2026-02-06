@@ -1,0 +1,58 @@
+[
+  {
+    "id": "22db3abb19751f8003488a86f82514c5",
+    "groupId": "3d211d40442afe22f358752903f6a470",
+    "approvalToken": "f920d3df7fc4c3347bbf37fd50fd09f30ded3e52655b84f843393b09fb699358",
+    "date": "2026-02-05",
+    "type": "Leave",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "reason": "",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "status": "pending",
+    "createdAt": "2026-02-03T23:18:02.120Z"
+  },
+  {
+    "id": "c81aa65985132136fcf46da375ca3379",
+    "groupId": "3d211d40442afe22f358752903f6a470",
+    "approvalToken": "f920d3df7fc4c3347bbf37fd50fd09f30ded3e52655b84f843393b09fb699358",
+    "date": "2026-02-08",
+    "type": "Leave",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "reason": "",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "status": "pending",
+    "createdAt": "2026-02-03T23:18:02.120Z"
+  },
+  {
+    "id": "2d639592a2e2549a281810db455b0d34",
+    "groupId": "3d211d40442afe22f358752903f6a470",
+    "approvalToken": "f920d3df7fc4c3347bbf37fd50fd09f30ded3e52655b84f843393b09fb699358",
+    "date": "2026-02-09",
+    "type": "Leave",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "reason": "",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "status": "pending",
+    "createdAt": "2026-02-03T23:18:02.120Z"
+  },
+  {
+    "id": "bffcf3c437d0eec32feead42ae930c6f",
+    "groupId": "3d211d40442afe22f358752903f6a470",
+    "approvalToken": "f920d3df7fc4c3347bbf37fd50fd09f30ded3e52655b84f843393b09fb699358",
+    "date": "2026-02-10",
+    "type": "Leave",
+    "name": "408275a@akersolutions.com",
+    "note": "",
+    "reason": "",
+    "employeeId": "408275a",
+    "email": "408275a@akersolutions.com",
+    "status": "pending",
+    "createdAt": "2026-02-03T23:18:02.120Z"
+  }
+]

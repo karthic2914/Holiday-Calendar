@@ -2,6 +2,7 @@
   "dependencies": {
     "express": "^5.2.1",
     "express-session": "^1.19.0",
-    "nodemailer": "^7.0.13"
+    "node-expose-sspi": "^0.1.60",
+    "nodemailer": "^8.0.0"
   }
 }
