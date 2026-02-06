@@ -1,8 +1,9 @@
-# Sensitive data
+# Sensitive Data
 data/entries.json
 data/roles.json
 email-config.json
 employee-routing.json
+approval-routing.json
 
 # Logs
 logs/
@@ -15,6 +16,15 @@ node_modules/
 *_backup_*.json
 *.backup
 
-# Windows
+# Environment
+.env
+.env.local
+
+# Windows Service
 nssm.exe
 *.bat
+
+# OS Files
+Thumbs.db
+Desktop.ini
+.DS_Store
