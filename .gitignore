@@ -1,23 +1,20 @@
-# Backup files
-data/entries_backup_*.json
-entries_backup_*.json
-*_backup_*.json
-*.backup
+# Sensitive data
+data/entries.json
+data/roles.json
+email-config.json
+employee-routing.json
 
 # Logs
 logs/
 *.log
 
-# Node modules
+# Dependencies
 node_modules/
 
-# Environment files
-.env
+# Backups
+*_backup_*.json
+*.backup
 
 # Windows
-Thumbs.db
-Desktop.ini
-
-# Service executable
 nssm.exe
-start-with-sspi.bat
+*.bat
